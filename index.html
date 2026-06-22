@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriRide - Rapido for Tractors, JCBs & Farm Machines</title>
+  <meta name="description" content="Book tractors, JCB excavators, harvesters, tippers, and borewell machines instantly. AgriRide is the on-demand logistics provider for agricultural machinery.">
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Apply dark mode, language font, and hide splash instantly to prevent flash -->
+  <script>
+    if(localStorage.getItem('agriride_dark_mode')==='true')document.documentElement.classList.add('dark-mode');
+    const savedLang = localStorage.getItem('agriride_language') || 'en';
+    document.documentElement.classList.add('lang-' + savedLang);
+    if(sessionStorage.getItem('agriride_splash_shown')==='true') {
+      const style = document.createElement('style');
+      style.textContent = '#agriride-splash { display: none !important; }';
+      document.head.appendChild(style);
+    }
+  </script>
+</head>
+<body>
+  <!-- Premium Animated Intro Splash Screen -->
+  <div id="agriride-splash" class="agriride-splash-overlay">
+    <div class="splash-particles" id="splash-particles-intro"></div>
+    <div class="splash-content-box">
+      <div class="tractor-container">
+        <svg class="animated-tractor-svg" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+          <line x1="5" y1="56" x2="95" y2="56" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" />
+          <circle cx="68" cy="12" r="3" fill="rgba(255,255,255,0.3)" />
+          <circle cx="70" cy="8" r="4" fill="rgba(255,255,255,0.2)" />
+          <circle cx="73" cy="4" r="5" fill="rgba(255,255,255,0.1)" />
+          <g>
+            <path d="M22 18h16l4 14H18z" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M28 18v14M34 18v14" stroke="#FFFFFF" stroke-width="1.5" />
+            <path d="M12 32h34l8 6v10H10z" fill="#059669" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" />
+            <path d="M54 38h22v10H54z" fill="#059669" stroke="#FFFFFF" stroke-width="2" />
+            <path d="M76 38l4 4v6h-4z" fill="#34D399" />
+            <path d="M66 38V16h2v22z" fill="#FFFFFF" />
+            <line x1="44" y1="32" x2="48" y2="28" stroke="#FFFFFF" stroke-width="2" />
+            <circle cx="48" cy="28" r="3" fill="none" stroke="#FFFFFF" stroke-width="1.5" />
+          </g>
+          <g class="wheel-rotate-class" style="transform-origin: 28px 48px;">
+            <circle cx="28" cy="48" r="10" fill="#111827" stroke="#FFFFFF" stroke-width="2" />
+            <circle cx="28" cy="48" r="4" fill="#34D399" />
+            <line x1="28" y1="38" x2="28" y2="58" stroke="#FFFFFF" stroke-width="1.5" />
+            <line x1="18" y1="48" x2="38" y2="48" stroke="#FFFFFF" stroke-width="1.5" />
+          </g>
+          <g class="wheel-rotate-class" style="transform-origin: 70px 50px;">
+            <circle cx="70" cy="50" r="7" fill="#111827" stroke="#FFFFFF" stroke-width="2" />
+            <circle cx="70" cy="50" r="3" fill="#34D399" />
+            <line x1="70" y1="43" x2="70" y2="57" stroke="#FFFFFF" stroke-width="1" />
+            <line x1="63" y1="50" x2="77" y2="50" stroke="#FFFFFF" stroke-width="1" />
+          </g>
+        </svg>
+      </div>
+      <h1 class="splash-title">Agri<span>Ride</span></h1>
+      <p class="splash-subtitle" id="splash-intro-tagline" data-i18n="splash_tagline">Rapido for Tractors & Farm Machines</p>
+      <div class="splash-loader-container">
+        <div class="splash-loader-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Step-by-Step Onboarding Walkthrough -->
+  <div id="agriride-onboarding" class="agriride-splash-overlay" style="display: none;">
+    <div class="splash-particles" id="splash-particles-onboard"></div>
+    
+    <div class="onboarding-card">
+      <div class="onboarding-slider-viewport">
+        <div class="onboarding-slider" id="onboarding-slider">
+          
+          <!-- Slide 1: Convenient Machinery -->
+          <div class="onboarding-slide">
+            <div class="onboarding-illustration">
+              <svg viewBox="0 0 200 150" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 110 C 60 70, 100 130, 140 80 T 180 100" fill="none" stroke="#E2E8F0" stroke-width="4" stroke-linecap="round" />
+                <path d="M30 40 C 70 80, 110 30, 150 90" fill="none" stroke="#F1F5F9" stroke-width="3" />
+                <path d="M25 100 Q 80 50 120 100 T 175 60" fill="none" stroke="#34D399" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round" />
+                <g transform="translate(80, 50)">
+                  <circle cx="0" cy="0" r="14" fill="#E6F4EA" />
+                  <path d="M0 -8 C -4 -8, -7 -5, -7 -1 C -7 4, 0 10, 0 10 C 0 10, 7 4, 7 -1 C 7 -5, 4 -8, 0 -8 Z" fill="#059669" />
+                  <circle cx="0" cy="-1" r="3" fill="#FFFFFF" />
+                </g>
+                <g transform="translate(140, 80)">
+                  <circle cx="0" cy="0" r="12" fill="#E6F4EA" />
+                  <path d="M0 -6 C -3 -6, -5 -4, -5 -1 C -5 3, 0 8, 0 8 C 0 8, 5 3, 5 -1 C 5 -4, 3 -6, 0 -6 Z" fill="#059669" />
+                  <circle cx="0" cy="-1" r="2" fill="#FFFFFF" />
+                </g>
+                <g transform="translate(110, 85) scale(0.9)">
+                  <path d="M-15 10 h25 l6 6 v10 h-31z" fill="#059669" stroke="#FFFFFF" stroke-width="1.5" />
+                  <path d="M-8 -2 h12 l3 12 h-15z" fill="none" stroke="#1E293B" stroke-width="2" />
+                  <line x1="10" y1="16" x2="10" y2="2" stroke="#FFFFFF" stroke-width="2" />
+                  <circle cx="-10" cy="24" r="8" fill="#1E293B" stroke="#FFFFFF" stroke-width="1.5" />
+                  <circle cx="-10" cy="24" r="3" fill="#34D399" />
+                  <circle cx="12" cy="25" r="5" fill="#1E293B" stroke="#FFFFFF" stroke-width="1.5" />
+                  <circle cx="12" cy="25" r="2" fill="#34D399" />
+                </g>
+              </svg>
+            </div>
+            <h2 class="onboarding-title" data-i18n="onboarding1_title">Convenient Bookings</h2>
+            <p class="onboarding-desc" data-i18n="onboarding1_desc">Book tractors, JCBs & harvesters across 1000+ villages instantly in India.</p>
+          </div>
+
+          <!-- Slide 2: Verified Operators -->
+          <div class="onboarding-slide">
+            <div class="onboarding-illustration">
+              <svg viewBox="0 0 200 150" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 20 C 130 20, 160 30, 160 60 C 160 110, 100 140, 100 140 C 100 140, 40 110, 40 60 C 40 30, 70 20, 100 20 Z" fill="#FCD34D" opacity="0.15" />
+                <path d="M100 25 C 125 25, 150 33, 150 58 C 150 98, 100 128, 100 128 C 100 128, 50 98, 50 58 C 50 33, 75 25, 100 25 Z" fill="#F59E0B" />
+                <path d="M75 80 C 75 60, 125 60, 125 80 C 125 82, 75 82, 75 80 Z" fill="#FFFFFF" />
+                <path d="M80 82 h40 v6 h-40 Z" fill="#FFFFFF" />
+                <circle cx="100" cy="55" r="10" fill="#FFFFFF" />
+                <path d="M88 53 h24 v4 h-24 Z" fill="#F59E0B" />
+                <circle cx="130" cy="100" r="18" fill="#FFFFFF" />
+                <circle cx="130" cy="100" r="15" fill="#34D399" />
+                <path d="M124 100 L128 104 L137 95" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h2 class="onboarding-title" data-i18n="onboarding2_title">Verified Operators</h2>
+            <p class="onboarding-desc" data-i18n="onboarding2_desc">Our skilled drivers & machinery captains follow verified safety & professional practices.</p>
+          </div>
+
+          <!-- Slide 3: Pocket-Friendly Pricing -->
+          <div class="onboarding-slide">
+            <div class="onboarding-illustration">
+              <svg viewBox="0 0 200 150" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <rect x="65" y="30" width="60" height="35" rx="4" fill="#34D399" transform="rotate(-15, 95, 47)" stroke="#FFFFFF" stroke-width="1.5" />
+                <rect x="75" y="35" width="60" height="35" rx="4" fill="#059669" transform="rotate(5, 105, 52)" stroke="#FFFFFF" stroke-width="1.5" />
+                <path d="M50 60 h100 v60 C 150 124, 146 128, 142 128 H 58 C 54 128, 50 124, 50 120 Z" fill="#B45309" />
+                <path d="M46 64 h108 C 158 64, 160 66, 160 70 v10 H 40 v-10 C 40 66, 42 64, 46 64 Z" fill="#D97706" />
+                <path d="M140 85 h16 a 4 4 0 0 1 4 4 v10 a 4 4 0 0 1 -4 4 h-16 Z" fill="#B45309" />
+                <circle cx="150" cy="92" r="3.5" fill="#FBBF24" />
+              </svg>
+            </div>
+            <h2 class="onboarding-title" data-i18n="onboarding3_title">Pocket Friendly</h2>
+            <p class="onboarding-desc" data-i18n="onboarding3_desc">Flexible hourly and daily rental plans. We match the best machines for your budget.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Footer Control Panel -->
+      <div class="onboarding-footer">
+        <button class="btn-onboarding-skip" id="btn-onboard-skip" onclick="finishOnboarding()" data-i18n="btn_skip">Skip</button>
+        <div class="onboarding-dots">
+          <div class="onboarding-dot active" data-index="0"></div>
+          <div class="onboarding-dot" data-index="1"></div>
+          <div class="onboarding-dot" data-index="2"></div>
+        </div>
+        <button class="btn-onboarding-next" id="btn-onboard-next" onclick="nextSlide()">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button class="btn-onboarding-start" id="btn-onboard-start" onclick="finishOnboarding()">
+          <span data-i18n="btn_get_started">Getting Started</span> <i class="fa-solid fa-chevron-right" style="font-size:12px; margin-left:4px;"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Create random floating particles for both layers
+    function createParticles(containerId, count) {
+      const container = document.getElementById(containerId);
+      if (container) {
+        for (let i = 0; i < count; i++) {
+          const p = document.createElement('div');
+          p.className = 'splash-particle';
+          p.style.left = Math.random() * 100 + 'vw';
+          p.style.width = p.style.height = (Math.random() * 6 + 4) + 'px';
+          p.style.animationDelay = Math.random() * 5 + 's';
+          p.style.animationDuration = (Math.random() * 4 + 4) + 's';
+          container.appendChild(p);
+        }
+      }
+    }
+
+    // Check if splash has already been shown in this session
+    const hasShownSplash = sessionStorage.getItem('agriride_splash_shown') === 'true';
+
+    if (hasShownSplash) {
+      // Remove splash immediately to prevent showing it
+      const introSplash = document.getElementById('agriride-splash');
+      if (introSplash) {
+        introSplash.remove();
+      }
+      
+      // If not logged in, redirect to login page immediately
+      if (!localStorage.getItem('agriride-role')) {
+        window.location.href = 'login.html';
+      } else {
+        // Check if onboarding needs to be shown (if user hasn't completed it)
+        const onboardSplash = document.getElementById('agriride-onboarding');
+        if (onboardSplash && localStorage.getItem('agriride_onboarded_v1') !== 'true') {
+          createParticles('splash-particles-onboard', 10);
+          onboardSplash.style.display = 'flex';
+        }
+      }
+    } else {
+      // Set the session flag so it won't show again
+      sessionStorage.setItem('agriride_splash_shown', 'true');
+
+      // Create intro particles
+      createParticles('splash-particles-intro', 12);
+
+      // Auto-transition from Intro Splash after animation completes (2.5s)
+      setTimeout(() => {
+        const introSplash = document.getElementById('agriride-splash');
+        const onboardSplash = document.getElementById('agriride-onboarding');
+        
+        if (introSplash) {
+          introSplash.classList.add('exit-active');
+          
+          setTimeout(() => {
+            introSplash.remove();
+            
+            // If not logged in, redirect to login page after splash finishes
+            if (!localStorage.getItem('agriride-role')) {
+              window.location.href = 'login.html';
+              return;
+            }
+
+            // Check if onboarding needs to be shown
+            if (onboardSplash && localStorage.getItem('agriride_onboarded_v1') !== 'true') {
+              createParticles('splash-particles-onboard', 10);
+              onboardSplash.style.display = 'flex';
+            }
+          }, 700);
+        }
+      }, 2500);
+    }
+
+    // Onboarding slider state
+    let activeSlideIndex = 0;
+    const totalSlides = 3;
+    const slider = document.getElementById('onboarding-slider');
+    const dots = document.querySelectorAll('.onboarding-dot');
+    const btnNext = document.getElementById('btn-onboard-next');
+    const btnStart = document.getElementById('btn-onboard-start');
+    const btnSkip = document.getElementById('btn-onboard-skip');
+
+    function updateSliderPosition() {
+      slider.style.transform = `translateX(-${activeSlideIndex * 33.3333}%)`;
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === activeSlideIndex);
+      });
+
+      // Handle final slide button switch
+      if (activeSlideIndex === totalSlides - 1) {
+        btnNext.style.display = 'none';
+        btnSkip.style.visibility = 'hidden';
+        btnStart.style.display = 'block';
+      } else {
+        btnNext.style.display = 'flex';
+        btnSkip.style.visibility = 'visible';
+        btnStart.style.display = 'none';
+      }
+    }
+
+    function nextSlide() {
+      if (activeSlideIndex < totalSlides - 1) {
+        activeSlideIndex++;
+        updateSliderPosition();
+      }
+    }
+
+    function finishOnboarding() {
+      const onboard = document.getElementById('agriride-onboarding');
+      if (onboard) {
+        onboard.classList.add('exit-active');
+        setTimeout(() => {
+          onboard.remove();
+          localStorage.setItem('agriride_onboarded_v1', 'true');
+        }, 700);
+      }
+    }
+  </script>
+
+  <!-- Top Header Navigation -->
+  <header class="header-wrapper">
+    <div class="main-header">
+      
+      <!-- Hamburger Menu Button (Mobile view only) -->
+      <button class="mobile-hamburger-btn" onclick="toggleMobileSidebar()" id="mobile-sidebar-toggle" aria-label="Open sidebar">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Logo Brand -->
+      <a href="#" class="logo-section" onclick="switchTab('home')">
+        <div class="logo-icon-container">
+          <!-- Premium Green Tractor SVG Icon -->
+          <svg class="logo-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#059669" stroke-width="2">
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="18" r="4" />
+            <path d="M6 18h8v-6H9l-3 3v3z" />
+            <path d="M14 18v-8l-3-2H8v4h6" />
+            <path d="M18 18h-4" />
+            <circle cx="11" cy="7" r="1" fill="#059669" />
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>AgriRide</h1>
+          <p>Rapido for Tractors, JCBs & Farm Machines</p>
+        </div>
+      </a>
+
+
+      <!-- Navigation Tabs (Image 1) -->
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" data-tab="home">
+            <i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-tab="bookings">
+            <i class="fa-solid fa-calendar-days"></i> <span data-i18n="nav_bookings">Bookings</span>
+          </a>
+        </li>
+        <li class="nav-item" style="position: relative;">
+          <a href="#" class="nav-link" data-tab="alerts">
+            <i class="fa-solid fa-bell"></i> <span data-i18n="nav_alerts">Alerts</span>
+            <span class="badge" id="alerts-badge">2</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-tab="analytics">
+            <i class="fa-solid fa-chart-pie"></i> <span data-i18n="nav_analytics">Analytics</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-tab="profile">
+            <i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profile</span>
+          </a>
+        </li>
+      </ul>
+      
+    </div>
+  </header>
+
+  <!-- Premium Unified Mobile Sidebar Drawer (Exactly 3 options in top, 3 options in bottom) -->
+  <aside class="mobile-sidebar" id="mobile-sidebar">
+    <div class="sidebar-header">
+      <div class="logo-section">
+        <div class="logo-icon-container">
+          <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#059669" stroke-width="2">
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="18" r="4" />
+            <path d="M6 18h8v-6H9l-3 3v3z" />
+            <path d="M14 18v-8l-3-2H8v4h6" />
+            <path d="M18 18h-4" />
+            <circle cx="11" cy="7" r="1" fill="#059669" />
+          </svg>
+        </div>
+        <span class="logo-text-title" style="font-weight:700; font-size:18px; color:var(--primary); font-family:var(--font-title);">AgriRide</span>
+      </div>
+      <button class="sidebar-close-btn" onclick="toggleMobileSidebar()" aria-label="Close sidebar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="sidebar-profile" style="padding: 0 16px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); margin-bottom: 16px;">
+      <img src="assets/profile.png" onerror="this.src='https://ui-avatars.com/api/?name=Farmer&background=059669&color=fff'" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" alt="Profile Picture">
+      <div>
+        <h4 style="font-size: 15px; font-weight: 600; color: var(--text-main); margin-bottom: 2px;" id="sidebar-user-name">Guest User</h4>
+        <p style="font-size: 12px; color: var(--text-sub);" id="sidebar-user-phone">+91 0000000000</p>
+      </div>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <!-- 3 Options in Top -->
+      <div class="sidebar-group-top">
+        <a href="#" class="sidebar-nav-item active" data-tab="home" onclick="handleMobileNav('home')">
+          <i class="fa-solid fa-house"></i> <span data-i18n="nav_home">Home</span>
+        </a>
+        <a href="booking.html" class="sidebar-nav-item">
+          <i class="fa-solid fa-tractor"></i> <span data-i18n="booking_nav_btn">Book a Machine</span>
+        </a>
+        <a href="#" class="sidebar-nav-item" data-tab="bookings" onclick="handleMobileNav('bookings')">
+          <i class="fa-solid fa-calendar-days"></i> <span data-i18n="nav_bookings">Bookings</span>
+        </a>
+      </div>
+      
+      <!-- 3 Options in Bottom -->
+      <div class="sidebar-group-bottom">
+        <a href="#" class="sidebar-nav-item" data-tab="alerts" onclick="handleMobileNav('alerts')">
+          <i class="fa-solid fa-bell"></i> <span data-i18n="nav_alerts">Alerts</span>
+        </a>
+        <a href="#" class="sidebar-nav-item" data-tab="analytics" onclick="handleMobileNav('analytics')">
+          <i class="fa-solid fa-chart-pie"></i> <span data-i18n="nav_analytics">Analytics</span>
+        </a>
+        <a href="#" class="sidebar-nav-item" data-tab="profile" onclick="handleMobileNav('profile')">
+          <i class="fa-solid fa-user"></i> <span data-i18n="nav_profile">Profile</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+  <div class="mobile-sidebar-overlay" id="mobile-sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+  <!-- Toggle Simulator View Mode (Premium touch to trigger mobile preview easily on desktop) -->
+  <div class="view-mode-bar">
+    <button class="mode-toggle-btn" onclick="openBookingFlow()">
+      <i class="fa-solid fa-mobile-screen-button"></i> Open Booking Flow
+    </button>
+  </div>
+
+  <!-- Primary Layout Container -->
+  <main class="app-container" id="app-container">
+    
+    <!-- Left Hand Side: Dynamic Tabs Dashboard -->
+    <div class="dashboard-content">
+
+      <!-- TAB 1: HOME (Dashboard lists - Image 1) -->
+      <section id="home-tab" class="tab-view active">
+        <!-- Farmer Home View -->
+        <div id="farmer-home-view">
+          <div class="welcome-section">
+            <h2 class="welcome-title" data-i18n="farmer_welcome_title">Hello, Farmer 👋</h2>
+            <p class="welcome-subtitle" data-i18n="farmer_welcome_sub">What do you need?</p>
+          </div>
+
+          <div class="machine-list">
+            
+            <!-- Card 1: Tractor -->
+            <div class="machine-card" onclick="openBookingFlow('tractor')">
+              <div class="machine-card-left">
+                <div class="machine-image-wrapper">
+                  <img src="assets/tractor.png" class="machine-image" alt="Tractor">
+                </div>
+                <div class="machine-info">
+                  <h3 class="machine-name" data-i18n="machine_tractor">Tractor</h3>
+                  <button class="book-now-btn" data-i18n="btn_book_now">Select</button>
+                </div>
+              </div>
+              <div class="machine-card-right">
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Card 2: JCB -->
+            <div class="machine-card" onclick="openBookingFlow('jcb')">
+              <div class="machine-card-left">
+                <div class="machine-image-wrapper">
+                  <img src="assets/jcb.png" class="machine-image" alt="JCB">
+                </div>
+                <div class="machine-info">
+                  <h3 class="machine-name" data-i18n="machine_jcb">JCB</h3>
+                  <button class="book-now-btn" data-i18n="btn_book_now">Select</button>
+                </div>
+              </div>
+              <div class="machine-card-right">
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Card 3: Harvester -->
+            <div class="machine-card" onclick="openBookingFlow('harvester')">
+              <div class="machine-card-left">
+                <div class="machine-image-wrapper">
+                  <img src="assets/harvester.png" class="machine-image" alt="Harvester">
+                </div>
+                <div class="machine-info">
+                  <h3 class="machine-name" data-i18n="machine_harvester">Harvester</h3>
+                  <button class="book-now-btn" data-i18n="btn_book_now">Select</button>
+                </div>
+              </div>
+              <div class="machine-card-right">
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Card 4: Tipper / Lorry -->
+            <div class="machine-card" onclick="openBookingFlow('tipper')">
+              <div class="machine-card-left">
+                <div class="machine-image-wrapper">
+                  <img src="assets/tipper.png" class="machine-image" alt="Tipper / Lorry">
+                </div>
+                <div class="machine-info">
+                  <h3 class="machine-name" data-i18n="machine_tipper">Tipper / Lorry</h3>
+                  <button class="book-now-btn" data-i18n="btn_book_now">Select</button>
+                </div>
+              </div>
+              <div class="machine-card-right">
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Card 5: Borewell Machine -->
+            <div class="machine-card" onclick="openBookingFlow('borewell')">
+              <div class="machine-card-left">
+                <div class="machine-image-wrapper">
+                  <img src="assets/borewell.png" class="machine-image" alt="Borewell Machine">
+                </div>
+                <div class="machine-info">
+                  <h3 class="machine-name" data-i18n="machine_borewell">Borewell Machine</h3>
+                  <button class="book-now-btn" data-i18n="btn_book_now">Select</button>
+                </div>
+              </div>
+              <div class="machine-card-right">
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Worker Home View -->
+        <div id="worker-home-view" style="display: none;">
+          <div class="welcome-section">
+            <h2 class="welcome-title" id="worker-welcome-title">Hello, Operator 👋</h2>
+            <p class="welcome-subtitle">Here are the active jobs booked by farmers near you</p>
+          </div>
+          
+          <div id="worker-jobs-grid" class="bookings-grid" style="margin-top: 24px; display: flex; flex-direction: column; gap: 16px;">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: BOOKINGS -->
+      <section id="bookings-tab" class="tab-view">
+        <div class="welcome-section">
+          <h2 class="welcome-title" data-i18n="my_bookings_title">My Bookings</h2>
+          <p class="welcome-subtitle" data-i18n="my_bookings_sub">Manage and track your active machinery rentals</p>
+        </div>
+        
+        <div class="bookings-grid" id="bookings-grid">
+          <!-- Dynamic bookings loaded here from app.js -->
+        </div>
+      </section>
+
+      <!-- TAB 3: ALERTS -->
+      <section id="alerts-tab" class="tab-view">
+        <div class="welcome-section">
+          <h2 class="welcome-title" data-i18n="alerts_title">Notifications</h2>
+          <p class="welcome-subtitle" data-i18n="alerts_sub">Updates regarding your ongoing orders & exclusive promotions</p>
+        </div>
+
+        <div class="alerts-list" id="alerts-list">
+          <!-- Alerts rendered here -->
+        </div>
+      </section>
+
+      <!-- TAB 4: ANALYTICS -->
+      <section id="analytics-tab" class="tab-view">
+        <div class="welcome-section" style="background: var(--primary); color: white; padding: 12px 20px; border-radius: var(--radius-md) var(--radius-md) 0 0; margin-bottom: 16px;">
+          <h2 class="welcome-title" style="color: white; font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px; margin: 0;">Analytics & Reports <span style="font-size: 13px; font-weight: normal; opacity: 0.9;">(Web / Power BI)</span></h2>
+        </div>
+
+        <div class="analytics-container">
+          <!-- Analytics Overview -->
+          <div class="section-header" style="margin-top:10px; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="font-size: 18px; font-weight: 700; color: var(--text-main);" data-i18n="dashboard_analytics_overview">Analytics Overview</h3>
+          </div>
+
+          <!-- Overall Summary -->
+          <div class="analytics-grid summary-grid">
+            <div class="analytics-card">
+              <div class="ac-label" data-i18n="dashboard_total_bookings">Total Bookings</div>
+              <div class="ac-value" id="analytics-total-bookings">0</div>
+            </div>
+            <div class="analytics-card">
+              <div class="ac-label" data-i18n="dashboard_total_revenue">Total Revenue</div>
+              <div class="ac-value" id="analytics-total-revenue">₹ 0</div>
+            </div>
+            <div class="analytics-card">
+              <div class="ac-label" data-i18n="dashboard_total_hours">Total Hours Worked</div>
+              <div class="ac-value" id="analytics-total-hours">0 h</div>
+            </div>
+            <div class="analytics-card">
+              <div class="ac-label" data-i18n="dashboard_total_acres">Total Acres Worked</div>
+              <div class="ac-value" id="analytics-total-acres">0</div>
+            </div>
+          </div>
+
+          <!-- Charts Row 1 -->
+          <div class="analytics-grid charts-row">
+            <div class="analytics-card chart-card">
+              <div class="ac-label" style="margin-bottom: 16px;" data-i18n="chart_bookings_time">Bookings Over Time</div>
+              <div class="line-chart-placeholder">
+                <svg viewBox="0 0 400 150" class="line-chart-svg">
+                  <!-- Axes -->
+                  <line x1="40" y1="120" x2="380" y2="120" stroke="#e5e7eb" stroke-width="1"/>
+                  <line x1="40" y1="20" x2="40" y2="120" stroke="#e5e7eb" stroke-width="1"/>
+                  
+                  <!-- Grid lines -->
+                  <line x1="40" y1="95" x2="380" y2="95" stroke="#f3f4f6" stroke-width="1"/>
+                  <line x1="40" y1="70" x2="380" y2="70" stroke="#f3f4f6" stroke-width="1"/>
+                  <line x1="40" y1="45" x2="380" y2="45" stroke="#f3f4f6" stroke-width="1"/>
+                  
+                  <!-- Line path -->
+                  <path id="analytics-line-path" d="" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" style="display: none;"/>
+                  
+                  <!-- Data Points -->
+                  <g id="analytics-line-dots" style="display: none;"></g>
+                  
+                  <!-- Y-Axis Labels -->
+                  <text x="30" y="123" font-size="10" fill="#6b7280" text-anchor="end">0</text>
+                  <text x="30" y="98" font-size="10" fill="#6b7280" text-anchor="end">50</text>
+                  <text x="30" y="73" font-size="10" fill="#6b7280" text-anchor="end">100</text>
+                  <text x="30" y="48" font-size="10" fill="#6b7280" text-anchor="end">150</text>
+                  <text x="30" y="23" font-size="10" fill="#6b7280" text-anchor="end">200</text>
+
+                  <!-- X-Axis Labels -->
+                  <text x="60" y="135" font-size="10" fill="#6b7280" text-anchor="middle">Jan</text>
+                  <text x="110" y="135" font-size="10" fill="#6b7280" text-anchor="middle">Feb</text>
+                  <text x="160" y="135" font-size="10" fill="#6b7280" text-anchor="middle">Mar</text>
+                  <text x="210" y="135" font-size="10" fill="#6b7280" text-anchor="middle">Apr</text>
+                  <text x="260" y="135" font-size="10" fill="#6b7280" text-anchor="middle">May</text>
+                  <text x="310" y="135" font-size="10" fill="#6b7280" text-anchor="middle">Jun</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="analytics-card chart-card">
+              <div class="ac-label" style="margin-bottom: 16px;" data-i18n="chart_top_machines">Top Machines</div>
+              <div class="donut-chart-container">
+                <div class="donut-chart" id="analytics-donut-chart" style="background: #e5e7eb;"></div>
+                <div class="donut-legend">
+                  <div class="legend-item"><span class="color-box" style="background:#2563eb;"></span> Tractor <span class="pct" id="pct-tractor">0%</span></div>
+                  <div class="legend-item"><span class="color-box" style="background:#f59e0b;"></span> JCB <span class="pct" id="pct-jcb">0%</span></div>
+                  <div class="legend-item"><span class="color-box" style="background:#10b981;"></span> Harvester <span class="pct" id="pct-harvester">0%</span></div>
+                  <div class="legend-item"><span class="color-box" style="background:#06b6d4;"></span> Lorry <span class="pct" id="pct-lorry">0%</span></div>
+                  <div class="legend-item"><span class="color-box" style="background:#8b5cf6;"></span> Others <span class="pct" id="pct-others">0%</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row 2 -->
+          <div class="analytics-grid charts-row">
+            <div class="analytics-card chart-card">
+              <div class="ac-label" style="margin-bottom: 16px;" data-i18n="chart_demand_heatmap">Demand Heat Map (Village Level)</div>
+              <div class="heatmap-container">
+                <div class="heatmap-map">
+                  <!-- Abstract Map Background & Heat Dots -->
+                  <div class="heat-dot" style="top: 30%; left: 40%; width: 60px; height: 60px; background: radial-gradient(circle, rgba(239,68,68,0.9) 0%, rgba(245,158,11,0.6) 40%, rgba(255,255,255,0) 70%);"></div>
+                  <div class="heat-dot" style="top: 60%; left: 25%; width: 90px; height: 90px; background: radial-gradient(circle, rgba(239,68,68,1) 0%, rgba(245,158,11,0.7) 40%, rgba(255,255,255,0) 70%);"></div>
+                  <div class="heat-dot" style="top: 50%; left: 55%; width: 80px; height: 80px; background: radial-gradient(circle, rgba(239,68,68,0.8) 0%, rgba(245,158,11,0.5) 40%, rgba(255,255,255,0) 70%);"></div>
+                  <div class="heat-dot" style="top: 75%; left: 45%; width: 70px; height: 70px; background: radial-gradient(circle, rgba(245,158,11,0.8) 0%, rgba(252,211,77,0.5) 40%, rgba(255,255,255,0) 70%);"></div>
+                </div>
+                <div class="heatmap-legend">
+                  <span style="font-size: 11px; color: var(--text-sub);" data-i18n="chart_high_demand">High Demand</span>
+                  <div class="heatmap-gradient-bar"></div>
+                  <span style="font-size: 11px; color: var(--text-sub);" data-i18n="chart_low_demand">Low Demand</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="analytics-card chart-card">
+              <div class="ac-label" style="margin-bottom: 16px;" data-i18n="chart_machine_utilization">Machine Utilization</div>
+              <div class="bar-chart-container">
+                
+                <div class="bar-chart-y-axis">
+                  <span>100%</span>
+                  <span>80%</span>
+                  <span>60%</span>
+                  <span>40%</span>
+                  <span>20%</span>
+                  <span>0</span>
+                </div>
+                
+                <div class="bar-wrapper">
+                  <div class="bar-value" id="val-tractor">0%</div>
+                  <div class="bar-track"><div class="bar-fill" id="fill-tractor" style="height: 0%;"></div></div>
+                  <div class="bar-label" data-i18n="machine_tractor">Tractor</div>
+                </div>
+                
+                <div class="bar-wrapper">
+                  <div class="bar-value" id="val-jcb">0%</div>
+                  <div class="bar-track"><div class="bar-fill" id="fill-jcb" style="height: 0%;"></div></div>
+                  <div class="bar-label" data-i18n="machine_jcb">JCB</div>
+                </div>
+                
+                <div class="bar-wrapper">
+                  <div class="bar-value" id="val-harvester">0%</div>
+                  <div class="bar-track"><div class="bar-fill" id="fill-harvester" style="height: 0%;"></div></div>
+                  <div class="bar-label" data-i18n="machine_harvester">Harvester</div>
+                </div>
+                
+                <div class="bar-wrapper">
+                  <div class="bar-value" id="val-lorry">0%</div>
+                  <div class="bar-track"><div class="bar-fill" id="fill-lorry" style="height: 0%;"></div></div>
+                  <div class="bar-label" data-i18n="machine_tipper">Lorry</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 5: PROFILE -->
+      <section id="profile-tab" class="tab-view">
+        <div class="welcome-section">
+          <h2 class="welcome-title" data-i18n="profile_title">My Profile</h2>
+          <p class="welcome-subtitle" data-i18n="profile_sub">Manage your farmer credentials and addresses</p>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-avatar">
+            <i class="fa-solid fa-user-gear"></i>
+          </div>
+          <div class="profile-info">
+            <h3>Palaniswamy K.</h3>
+            <p>🌾 <span data-i18n="profile_role">Registered Farmer Partner</span></p>
+          </div>
+          
+          <div class="profile-details-grid">
+            <div class="profile-detail-item">
+              <h5 data-i18n="profile_id">Farmer ID</h5>
+              <p>AR-F-9472</p>
+            </div>
+            <div class="profile-detail-item">
+              <h5 data-i18n="profile_phone">Phone Number</h5>
+              <p>+91 98765 43210</p>
+            </div>
+            <div class="profile-detail-item">
+              <h5 data-i18n="profile_hub">Primary Hub</h5>
+              <p>Kumbakonam, TN</p>
+            </div>
+            <div class="profile-detail-item">
+              <h5 data-i18n="profile_aadhaar">Aadhaar Verified</h5>
+              <p style="color: var(--primary);"><i class="fa-solid fa-circle-check"></i> <span data-i18n="profile_yes">Yes</span></p>
+            </div>
+          </div>
+          
+          <div class="sidebar-help-box">
+            <i class="fa-solid fa-headset"></i>
+            <div class="sidebar-help-text">
+              <h6 data-i18n="sidebar_help_title">Need Help?</h6>
+              <p data-i18n="sidebar_help_desc">Contact our support for assistance.</p>
+            </div>
+          </div>
+          <button class="sidebar-help-btn"><i class="fa-solid fa-circle-question"></i> <span data-i18n="sidebar_help_btn">Help</span></button>
+        </div>
+      </section>
+
+    </div>
+
+
+      <!-- TAB 5: BOOKING DETAILS (Sub-page) -->
+      <section id="booking-details-tab" class="tab-view">
+        <div class="welcome-section" style="display: flex; align-items: center; gap: 16px;">
+          <button style="background: var(--bg-card); border: 1.5px solid var(--border); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-main); font-size: 16px; flex-shrink: 0;" onclick="switchTab('bookings')">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <div>
+            <h2 class="welcome-title" style="margin-bottom: 4px;">Order Details</h2>
+            <p class="welcome-subtitle" style="margin-bottom: 0;">Full information about your booking</p>
+          </div>
+        </div>
+        
+        <div class="profile-card" style="padding: 24px;">
+          <div id="booking-details-content" style="font-size: 14px; display: flex; flex-direction: column; gap: 16px; color: var(--text-main);">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+  <!-- JavaScript logic link -->
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

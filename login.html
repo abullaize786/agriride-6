@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriRide – Login</title>
+  <meta name="description" content="Login to AgriRide as a Farmer or Worker to access farm machinery booking services.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700;800&family=Noto+Sans+Tamil:wght@300;400;500;600;700;800&family=Noto+Sans+Telugu:wght@300;400;500;600;700;800&family=Noto+Sans+Kannada:wght@300;400;500;600;700;800&family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Noto+Sans+Gurmukhi:wght@300;400;500;600;700;800&family=Noto+Sans+Gujarati:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script>
+    if(localStorage.getItem('agriride_dark_mode')==='true')document.documentElement.classList.add('dark-mode');
+    const savedLang = localStorage.getItem('agriride_language') || 'en';
+    document.documentElement.classList.add('lang-' + savedLang);
+  </script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-1: #064E3B;
+      --green-2: #047857;
+      --green-3: #059669;
+      --green-4: #10B981;
+      --green-5: #34D399;
+      --green-light: #D1FAE5;
+      --amber-1: #92400E;
+      --amber-2: #D97706;
+      --amber-3: #F59E0B;
+      --amber-4: #FCD34D;
+      --amber-light: #FEF3C7;
+      --bg-dark: #0F1A12;
+      --bg-glass: rgba(255,255,255,0.08);
+      --text-white: #FFFFFF;
+      --text-light: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.45);
+      --shadow-glow-green: 0 0 60px rgba(16,185,129,0.25);
+      --shadow-glow-amber: 0 0 60px rgba(245,158,11,0.25);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --font-title: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    /* Language-Specific Fonts */
+    html.lang-hi, html.lang-mr {
+      --font-title: 'Noto Sans Devanagari', sans-serif;
+      --font-body: 'Noto Sans Devanagari', sans-serif;
+    }
+    html.lang-ta {
+      --font-title: 'Noto Sans Tamil', sans-serif;
+      --font-body: 'Noto Sans Tamil', sans-serif;
+    }
+    html.lang-te {
+      --font-title: 'Noto Sans Telugu', sans-serif;
+      --font-body: 'Noto Sans Telugu', sans-serif;
+    }
+    html.lang-kn {
+      --font-title: 'Noto Sans Kannada', sans-serif;
+      --font-body: 'Noto Sans Kannada', sans-serif;
+    }
+    html.lang-ml {
+      --font-title: 'Noto Sans Malayalam', sans-serif;
+      --font-body: 'Noto Sans Malayalam', sans-serif;
+    }
+    html.lang-bn {
+      --font-title: 'Noto Sans Bengali', sans-serif;
+      --font-body: 'Noto Sans Bengali', sans-serif;
+    }
+    html.lang-pa {
+      --font-title: 'Noto Sans Gurmukhi', sans-serif;
+      --font-body: 'Noto Sans Gurmukhi', sans-serif;
+    }
+    html.lang-gu {
+      --font-title: 'Noto Sans Gujarati', sans-serif;
+      --font-body: 'Noto Sans Gujarati', sans-serif;
+    }
+    html.lang-ur {
+      --font-title: 'Noto Nastaliq Urdu', sans-serif;
+      --font-body: 'Noto Nastaliq Urdu', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      min-height: 100vh;
+      background: var(--bg-dark);
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Animated Background ── */
+    .bg-scene {
+      position: fixed; inset: 0; z-index: 0; overflow: hidden;
+    }
+
+    .bg-scene::before {
+      content: '';
+      position: absolute; inset: -50%;
+      width: 200%; height: 200%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(16,185,129,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(245,158,11,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(6,78,59,0.3) 0%, transparent 70%);
+      animation: bgDrift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgDrift {
+      0% { transform: translate(0,0) rotate(0deg); }
+      100% { transform: translate(-5%,3%) rotate(3deg); }
+    }
+
+    .bg-grain {
+      position: fixed; inset: 0; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* Floating particles */
+    .particle {
+      position: fixed; border-radius: 50%;
+      pointer-events: none; z-index: 1;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* ── Main Container ── */
+    .login-container {
+      position: relative; z-index: 10;
+      width: 100%; max-width: 520px;
+      padding: 20px;
+    }
+
+    /* ── Logo / Brand ── */
+    .brand {
+      text-align: center;
+      margin-bottom: 32px;
+      animation: fadeSlideUp 0.8s ease both;
+    }
+
+    .brand-logo {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--green-3), var(--green-4));
+      border-radius: 20px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 12px 40px rgba(16,185,129,0.3);
+      margin-bottom: 16px;
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .brand h1 {
+      font-family: var(--font-title);
+      font-size: 32px; font-weight: 800;
+      color: var(--text-white);
+      letter-spacing: -0.5px;
+    }
+
+    .brand h1 span { color: var(--green-4); }
+
+    .brand p {
+      color: var(--text-light);
+      font-size: 14px; margin-top: 6px;
+    }
+
+    /* ── Glass Card ── */
+    .glass-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      backdrop-filter: blur(20px);
+      padding: 36px 32px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+      animation: fadeSlideUp 0.8s 0.15s ease both;
+    }
+
+    /* ── Segmented Role Switcher ── */
+    .role-selector-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    .role-tab {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-light);
+      border-radius: 6px;
+      font-family: var(--font-title);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .role-tab.active {
+      background: linear-gradient(135deg, var(--green-3), var(--green-4));
+      color: white;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+    }
+
+    .role-tab.active.worker-tab-active {
+      background: linear-gradient(135deg, var(--amber-2), var(--amber-3));
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+    }
+
+    /* ── Login Form ── */
+    .login-form {
+      display: block;
+      animation: fadeSlideUp 0.5s ease both;
+    }
+
+    .form-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .form-divider::before, .form-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .form-divider span {
+      font-size: 12px; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .f-group {
+      margin-bottom: 16px;
+    }
+
+    .f-group label {
+      display: block;
+      font-size: 13px; font-weight: 500;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+
+    .f-input-wrap {
+      position: relative;
+    }
+
+    .f-input-wrap i {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px; color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .f-input {
+      width: 100%;
+      padding: 14px 14px 14px 42px;
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text-white);
+      font-size: 14px;
+      font-family: var(--font-body);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .f-input::placeholder { color: var(--text-muted); }
+
+    .f-input:focus {
+      border-color: var(--green-4);
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+    }
+
+    .f-input:focus + i, .f-input:focus ~ i {
+      color: var(--green-4);
+    }
+
+    .f-input-wrap .toggle-pw {
+      position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      color: var(--text-muted); font-size: 15px;
+      cursor: pointer; padding: 4px;
+    }
+
+    .f-input-wrap .toggle-pw:hover { color: var(--text-light); }
+
+    .form-extras {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .remember-me {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-light); cursor: pointer;
+    }
+
+    .remember-me input[type="checkbox"] {
+      accent-color: var(--green-4);
+      width: 16px; height: 16px;
+    }
+
+    .forgot-link {
+      font-size: 13px; color: var(--green-4);
+      text-decoration: none; font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .forgot-link:hover { color: var(--green-5); }
+
+    /* ── Login Button ── */
+    .btn-login {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-title);
+      font-size: 16px; font-weight: 700;
+      color: white;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-login.farmer-btn {
+      background: linear-gradient(135deg, var(--green-2), var(--green-4));
+      box-shadow: 0 8px 32px rgba(16,185,129,0.3);
+    }
+
+    .btn-login.worker-btn {
+      background: linear-gradient(135deg, var(--amber-1), var(--amber-3));
+      box-shadow: 0 8px 32px rgba(245,158,11,0.3);
+    }
+
+    .btn-login:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-login.farmer-btn:hover {
+      box-shadow: 0 14px 44px rgba(16,185,129,0.4);
+    }
+
+    .btn-login.worker-btn:hover {
+      box-shadow: 0 14px 44px rgba(245,158,11,0.4);
+    }
+
+    .btn-login:active { transform: translateY(0); }
+
+    .btn-login::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+
+    .btn-login:hover::after { transform: translateX(100%); }
+
+    /* ── Social / OTP Options ── */
+    .alt-login {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .alt-login p {
+      font-size: 12px; color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .social-row {
+      display: flex; gap: 10px; justify-content: center;
+    }
+
+    .social-btn {
+      width: 48px; height: 48px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-light);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-btn:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    /* ── Sign Up Link ── */
+    .signup-link {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--text-light);
+      animation: fadeSlideUp 0.8s 0.3s ease both;
+    }
+
+    .signup-link a {
+      color: var(--green-4);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .signup-link a:hover { color: var(--green-5); text-decoration: underline; }
+
+    /* ── Animations ── */
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .glass-card { padding: 28px 20px; }
+      .brand h1 { font-size: 26px; }
+      .role-icon { width: 52px; height: 52px; font-size: 24px; }
+    }
+
+    /* ── Worker Jobs Preview Styling ── */
+    .preview-job-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .preview-job-card:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(245, 158, 11, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .preview-job-img {
+      width: 50px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .preview-job-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .preview-job-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-job-meta {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 3px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .preview-job-price {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--amber-3);
+      white-space: nowrap;
+    }
+    
+    .preview-status-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: capitalize;
+    }
+    
+    .preview-status-badge.confirmed {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34D399;
+    }
+    .preview-status-badge.accepted {
+      background: rgba(245, 158, 11, 0.15);
+      color: #FBBF24;
+    }
+    .preview-status-badge.ongoing {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60A5FA;
+    }
+    .preview-status-badge.completed {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10B981;
+    }
+    .preview-status-badge.cancelled {
+      background: rgba(239, 68, 68, 0.15);
+      color: #F87171;
+    }
+
+
+  </style>
+</head>
+<body>
+
+
+  <!-- Animated Background -->
+  <div class="bg-scene"></div>
+  <div class="bg-grain"></div>
+
+  <!-- Main -->
+  <div class="login-container">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-logo">🚜</div>
+      <h1>Agri<span>Ride</span></h1>
+      <p data-i18n="login_brand_tagline">Farm machinery at your fingertips</p>
+    </div>
+
+    <!-- Glass Card -->
+    <div class="glass-card">
+
+      <!-- Segmented Role Selector -->
+      <div class="role-selector-tabs">
+        <button type="button" id="role-tab-farmer" class="role-tab active" onclick="selectRole('farmer')">🌾 <span data-i18n="login_farmer_role">Farmer</span></button>
+        <button type="button" id="role-tab-worker" class="role-tab" onclick="selectRole('worker')">🔧 <span data-i18n="login_worker_role">Operator</span></button>
+      </div>
+
+      <!-- Login Form -->
+      <div class="login-form" id="login-form">
+
+        <div class="f-group">
+          <label for="login-phone" data-i18n="login_phone_label">Phone Number</label>
+          <div class="f-input-wrap">
+            <input type="tel" class="f-input" id="login-phone" placeholder="Enter your mobile number" maxlength="10">
+            <i class="fa-solid fa-phone"></i>
+          </div>
+        </div>
+
+        <div class="f-group">
+          <label for="login-password" data-i18n="login_password_label">Password</label>
+          <div class="f-input-wrap">
+            <input type="password" class="f-input" id="login-password" placeholder="Enter your password">
+            <i class="fa-solid fa-lock"></i>
+            <button type="button" class="toggle-pw" onclick="togglePassword()">
+              <i class="fa-regular fa-eye" id="pw-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-extras">
+          <label class="remember-me">
+            <input type="checkbox" checked> <span data-i18n="login_remember_me">Remember me</span>
+          </label>
+          <a href="#" class="forgot-link" data-i18n="login_forgot_password">Forgot Password?</a>
+        </div>
+
+        <button class="btn-login farmer-btn" id="login-btn" onclick="handleLogin()">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span data-i18n="login_btn">Continue securely</span>
+        </button>
+
+        <div class="alt-login">
+          <p data-i18n="login_or_continue">Or continue with</p>
+          <div class="social-row">
+            <button class="social-btn" title="Google"><i class="fa-brands fa-google"></i></button>
+            <button class="social-btn" title="WhatsApp OTP"><i class="fa-brands fa-whatsapp"></i></button>
+            <button class="social-btn" title="Email"><i class="fa-solid fa-envelope"></i></button>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+    <!-- Sign Up Link -->
+    <div class="signup-link">
+      <span data-i18n="login_no_account">Don't have an account?</span> <a href="#" data-i18n="login_sign_up">Sign Up</a>
+    </div>
+
+  </div>
+
+  <script>
+
+    // ── Role Selection ──
+    let currentRole = 'farmer';
+
+    function selectRole(role) {
+      currentRole = role;
+
+      const farmerTab = document.getElementById('role-tab-farmer');
+      const workerTab = document.getElementById('role-tab-worker');
+      const btn = document.getElementById('login-btn');
+      const phoneInput = document.getElementById('login-phone');
+      const passwordInput = document.getElementById('login-password');
+
+      if (role === 'farmer') {
+        if (farmerTab) farmerTab.classList.add('active');
+        if (workerTab) workerTab.classList.remove('active');
+        if (workerTab) workerTab.classList.remove('worker-tab-active');
+        if (btn) btn.className = 'btn-login farmer-btn';
+        if (phoneInput) phoneInput.value = '9876543210';
+        if (passwordInput) passwordInput.value = 'farmer123';
+      } else {
+        if (farmerTab) farmerTab.classList.remove('active');
+        if (workerTab) workerTab.classList.add('active');
+        if (workerTab) workerTab.classList.add('worker-tab-active');
+        if (btn) btn.className = 'btn-login worker-btn';
+        if (phoneInput) phoneInput.value = '8765432109';
+        if (passwordInput) passwordInput.value = 'worker123';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      selectRole('farmer');
+    });
+
+
+
+    // ── Toggle Password ──
+    function togglePassword() {
+      const pw = document.getElementById('login-password');
+      const eye = document.getElementById('pw-eye');
+      if (pw.type === 'password') {
+        pw.type = 'text';
+        eye.classList.replace('fa-eye', 'fa-eye-slash');
+      } else {
+        pw.type = 'password';
+        eye.classList.replace('fa-eye-slash', 'fa-eye');
+      }
+    }
+
+    // ── Handle Login ──
+    function handleLogin() {
+      const phone = document.getElementById('login-phone').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+
+      if (!phone) {
+        shakeInput('login-phone');
+        return;
+      }
+      if (!password) {
+        shakeInput('login-password');
+        return;
+      }
+
+      const btn = document.getElementById('login-btn');
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Logging in...';
+      btn.disabled = true;
+
+      // POST to Flask backend login API
+      fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phone, role: currentRole, password: password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+          btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Continue securely';
+          btn.disabled = false;
+          return;
+        }
+        // Store session info locally
+        localStorage.setItem('agriride-role', data.role);
+        localStorage.setItem('agriride-phone', data.phone);
+        localStorage.setItem('agriride-name', data.name);
+        
+        // Redirect to dashboard
+        window.location.href = 'index.html';
+      })
+      .catch(err => {
+        console.error('Error logging in:', err);
+        alert('Server connection failed. Redirecting offline...');
+        localStorage.setItem('agriride-role', currentRole);
+        localStorage.setItem('agriride-phone', phone);
+        localStorage.setItem('agriride-name', currentRole === 'farmer' ? 'Palaniswamy K.' : 'Ramesh Kumar');
+        window.location.href = 'index.html';
+      });
+    }
+
+    function shakeInput(id) {
+      const el = document.getElementById(id);
+      el.style.borderColor = '#EF4444';
+      el.style.animation = 'shake 0.4s ease';
+      setTimeout(() => {
+        el.style.borderColor = '';
+        el.style.animation = '';
+      }, 500);
+    }
+
+    // Shake animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-6px); }
+        40% { transform: translateX(6px); }
+        60% { transform: translateX(-4px); }
+        80% { transform: translateX(4px); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Allow enter key to submit
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && currentRole) handleLogin();
+    });
+  </script>
+
+  <script src="i18n.js"></script>
+</body>
+</html>
